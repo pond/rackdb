@@ -1,5 +1,7 @@
 # `rackdb`
 
+[![Gem Version](https://badge.fury.io/rb/rackdb.svg)](https://rubygems.org/gems/rackdb) [![Build Status](https://travis-ci.org/pond/rackdb.svg?branch=master)](https://travis-ci.org/LoyaltyNZ/rackdb) [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+
 ## About
 
 **rackdb** is a database console for Ruby applications that run on Rack, which follow the Rails-like convention of a `config/database.yml` file describing the database connection parameters. This includes [Rails applications](http://rubyonrails.org) and [Hoodoo services](http://hoodoo.cloud/).
