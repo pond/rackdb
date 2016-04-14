@@ -1,0 +1,17 @@
+#!/usr/bin/env ruby
+
+require File.expand_path(
+  File.join(
+    File.dirname( __FILE__),
+    '..', 'lib', 'rackdb', 'init.rb'
+  )
+)
+
+# Prevent STDOUT and STDERR from being reopened (some applications do this
+# to be able to log under Passenger).
+#
+def STDOUT.reopen(*args); end
+def STDERR.reopen(*args); end
+
+RackDB::Console.start()
+p eval( ARGV.join( ' ' ) ) unless ARGV.empty?

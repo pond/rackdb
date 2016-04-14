@@ -1,0 +1,19 @@
+default: &default
+  adapter: postgresql
+  encoding: utf8
+
+development:
+  <<: *default
+  database: example_development
+
+foo:
+  <<: *default
+  database: example_foo
+
+production:
+  <<: *default
+  database: example_production
+
+test:
+  <<: *default
+  database: example_text
