@@ -1,4 +1,4 @@
-## 0.0.2 (2016-04-18)
+## 0.0.2, 0.0.3 (2016-04-18)
 
 * Regenerate `Gemfile.lock` with Bundler 1.11.2 and perform a maintenance update. Ruby 2.1.8 `.ruby_version` file added to source distribution for local development.
 
