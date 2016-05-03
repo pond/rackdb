@@ -2,6 +2,7 @@ require 'erb'
 require 'yaml'
 require 'optparse'
 require 'rbconfig'
+require 'rack'
 require 'active_record'
 
 module Service
@@ -25,7 +26,7 @@ module RackDB
       exit if options.nil?
 
       ENV['RACK_ENV'] = options[:environment] || environment()
-      Service.config.env = environment()
+      ::Service.config.env = environment()
 
       case config["adapter"]
       when /^(jdbc)?mysql/
@@ -104,77 +105,96 @@ module RackDB
 
     def config
       @config ||= begin
-        if configurations()[environment].blank?
+        if configurations()[ environment ].blank?
           raise ActiveRecord::AdapterNotSpecified, "'#{environment}' database is not configured. Available configuration: #{configurations().inspect}"
         else
-          configurations()[environment]
+          configurations()[ environment ]
         end
       end
     end
 
     def environment
-      ENV["RACK_ENV"] || "development"
+      ENV[ 'RACK_ENV' ] || 'development'
     end
 
     protected
 
     def root
-      if defined?( Application ) && Application.respond_to?( :root )
-        Application.root # Rails-like
-      elsif Rack.respond_to?( :root )
-        Rack.root # Hypothetical
+      if defined?( ::Application ) && ::Application.respond_to?( :root )
+        ::Application.root # Rails-like
+      elsif ::Rack.respond_to?( :root )
+        ::Rack.root # Hypothetical
       elsif defined?( Service ) && Service.respond_to?( :config ) && Service.config.respond_to?( :root ) && Service.config.root != nil
-        Service.config.root # Hoodoo service
+        ::Service.config.root # Hoodoo service
       else
         '.'
       end
     end
 
     def configurations
-      ActiveRecord::Base.default_timezone = :utc
+      ::ActiveRecord::Base.default_timezone = :utc
 
-      path           = File.join( root(), 'config', 'database.yml' )
-      erb_yaml_file  = File.read( path )
-      pure_yaml_file = ERB.new( erb_yaml_file ).result
+      path           = ::File.join( root(), 'config', 'database.yml' )
+      erb_yaml_file  = ::File.read( path )
+      pure_yaml_file = ::ERB.new( erb_yaml_file ).result
 
-      ActiveRecord::Base.configurations = YAML.load( pure_yaml_file )
-      return ActiveRecord::Base.configurations
+      ::ActiveRecord::Base.configurations = YAML.load( pure_yaml_file )
+      return ::ActiveRecord::Base.configurations
     end
 
-    def parse_arguments(arguments)
+    def parse_arguments( arguments )
       options = {}
 
-      OptionParser.new do |opt|
-        opt.banner = "Usage: rackdb [environment] [options]"
-        opt.on("-p", "--include-password", "Automatically provide the password from database.yml") do |v|
-          options['include_password'] = true
+      ::OptionParser.new do | opt |
+        opt.banner = 'Usage: rackdb [environment] [options]'
+
+        opt.on(
+          '-p',
+          '--include-password',
+          'Automatically provide the password from database.yml'
+        ) do | v |
+          options[ 'include_password' ] = true
         end
 
-        opt.on("--mode [MODE]", ['html', 'list', 'line', 'column'],
-          "Automatically put the sqlite3 database in the specified mode (html, list, line, column).") do |mode|
-            options['mode'] = mode
+        opt.on(
+          '--mode [MODE]', [ 'html', 'list', 'line', 'column' ],
+          'Automatically put the sqlite3 database in the specified mode (html, list, line, column).'
+        ) do | mode |
+          options[ 'mode' ] = mode
         end
 
-        opt.on("--header", "Turn on sqlite3 database command line header display.") do |h|
-          options['header'] = h
+        opt.on(
+          '--header',
+          'Turn on sqlite3 database command line header display.'
+        ) do | h |
+          options[ 'header' ] = h
         end
 
-        opt.on("-h", "--help", "Show this help message.") do
+        opt.on(
+          '-h',
+          '--help',
+          'Show this help message.'
+        ) do
           puts opt
           return nil
         end
 
-        opt.on("-e", "--environment=name", String,
-          "Specifies the environment to run this console under (test/development/production).",
-          "Default: development"
-        ) { |v| options[:environment] = v.strip }
+        opt.on(
+          '-e',
+          '--environment=name',
+          String,
+          'Specifies the environment to run this console under (e.g. test/development/production).',
+          'Default: development'
+        ) do | v |
+          options[ :environment ] = v.strip
+        end
 
-        opt.parse!(arguments)
-        abort opt.to_s unless (0..1).include?(arguments.size)
+        opt.parse!( arguments )
+        abort opt.to_s unless ( 0..1 ).include?( arguments.size )
       end
 
-      if arguments.first && arguments.first[0] != '-'
-        options[:environment] = arguments.first
+      if arguments.first && arguments.first[ 0 ] != '-'
+        options[ :environment ] = arguments.first
       end
 
       options
