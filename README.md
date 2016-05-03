@@ -1,6 +1,6 @@
 # `rackdb`
 
-[![Gem Version](https://badge.fury.io/rb/rackdb.svg)](https://rubygems.org/gems/rackdb) [![Build Status](https://travis-ci.org/pond/rackdb.svg?branch=master)](https://travis-ci.org/LoyaltyNZ/rackdb) [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![Gem Version](https://badge.fury.io/rb/rackdb.svg)](https://rubygems.org/gems/rackdb) [![Build Status](https://travis-ci.org/pond/rackdb.svg?branch=master)](https://travis-ci.org/pond/rackdb) [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 ## About
 
