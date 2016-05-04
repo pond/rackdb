@@ -19,10 +19,11 @@ Gem::Specification.new do |s|
 
   s.required_ruby_version = '>= 2.1'
 
-  s.add_dependency             'rack',         '~> 1.6'
-  s.add_dependency             'activerecord', '~> 4'
+  s.add_dependency             'rack',           '~> 1.6'
+  s.add_dependency             'activerecord',   '~> 4'
 
-  s.add_development_dependency 'rack-test',    '~> 0.6'
-  s.add_development_dependency 'rspec',        '~> 3.3'
-  s.add_development_dependency 'rspec-mocks',  '~> 3.3'
+  s.add_development_dependency 'rack-test',      '~> 0.6'
+  s.add_development_dependency 'rspec',          '~> 3.3'
+  s.add_development_dependency 'rspec-mocks',    '~> 3.3'
+  s.add_development_dependency 'simplecov-rcov', '~> 0.2'
 end

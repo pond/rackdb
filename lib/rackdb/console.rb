@@ -105,10 +105,54 @@ module RackDB
 
     def config
       @config ||= begin
-        if configurations()[ environment ].blank?
-          raise ActiveRecord::AdapterNotSpecified, "'#{environment}' database is not configured. Available configuration: #{configurations().inspect}"
+        if ENV[ 'DATABASE_URL' ]
+
+          # Assumptions: "jdbc:foo://..." style prefixes break the URI parser
+          # and we don't care about JDBC for parsing; strip it. SQLServer URIs
+          # start with "mssql"; 'sqlite' is taken to mean 'sqlite3'; else they
+          # start with something that works as the datapter verbatim.
+          #
+          # All presently known and supported connection URIs have the target
+          # database name as their path - either just one path element in most
+          # cases, or a full path to a file for SQLite.
+          #
+          # Unsupported: Oracle; URI is deeply bizarre. Custom sockets, pools,
+          # timeouts, query parameters etc. are ignored.
+
+          uri_str = ENV[ 'DATABASE_URL' ].gsub( /^jdbc\:/, '' )
+          uri     = URI.parse( uri_str )
+          scheme  = uri.scheme.downcase
+          adapter = case scheme
+            when 'mssql'
+              'sqlserver'
+            when 'sqlite'
+              'sqlite3'
+            else
+              scheme
+          end
+
+          path = case adapter
+            when 'sqlite3'
+              uri.path
+            else
+              ( uri.path || '' ).gsub( /^\/+/, '' ) # Remove any leading '/'s
+          end
+
+          {
+            'adapter'  => adapter,
+            'database' => path,
+            'user'     => uri.user,
+            'password' => uri.password,
+            'host'     => uri.host,
+            'port'     => uri.port
+          }
+
+        elsif configurations()[ environment ].blank?
+          raise ActiveRecord::AdapterNotSpecified, "Neither 'DATABASE_URL' nor 'config.yml' entry '#{environment}' are configured. Available configurations: #{configurations().inspect}"
+
         else
           configurations()[ environment ]
+
         end
       end
     end

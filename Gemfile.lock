@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rackdb (0.0.4)
+    rackdb (1.0.0)
       activerecord (~> 4)
       rack (~> 1.6)
 
@@ -24,6 +24,7 @@ GEM
     arel (6.0.3)
     builder (3.2.2)
     diff-lcs (1.2.5)
+    docile (1.1.5)
     i18n (0.7.0)
     json (1.8.3)
     minitest (5.8.4)
@@ -43,6 +44,13 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.4.0)
     rspec-support (3.4.1)
+    simplecov (0.11.2)
+      docile (~> 1.1.0)
+      json (~> 1.8)
+      simplecov-html (~> 0.10.0)
+    simplecov-html (0.10.0)
+    simplecov-rcov (0.2.3)
+      simplecov (>= 0.4.1)
     thread_safe (0.3.5)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
@@ -55,6 +63,7 @@ DEPENDENCIES
   rackdb!
   rspec (~> 3.3)
   rspec-mocks (~> 3.3)
+  simplecov-rcov (~> 0.2)
 
 BUNDLED WITH
    1.11.2

@@ -1,5 +1,5 @@
 default: &default
-  adapter: postgresql
+  adapter: example
   encoding: utf8
 
 development:
