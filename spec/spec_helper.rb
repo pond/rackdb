@@ -1,4 +1,18 @@
+# Set the correct environment for testing.
+
 ENV[ 'RACK_ENV' ] = 'test'
+
+# Configure the code coverage analyser.
+
+require 'simplecov'
+require 'simplecov-rcov'
+
+SimpleCov.formatter = SimpleCov::Formatter::RcovFormatter
+SimpleCov.start do
+  add_filter '/spec/'
+end
+
+# Configure the test suite.
 
 require 'rack/test'
 

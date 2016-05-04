@@ -1,3 +1,9 @@
+## 1.0.0 (2016-05-04)
+
+* Adds override of `config.yml` via `DATABASE_URL` environment variable; see `README.md` for details.
+* RCov added to test suite to verify test coverage of lines of code, albeit not all branch conditions. The coverage report makes it easy to see which things are covered and which things aren't (e.g. because they're imported from another code base with assumed coverage there).
+* Now considered feature-complete to original design goals and stable, so bumping to version 1.0.0.
+
 ## 0.0.4 (2016-05-03)
 
 * Fix very silly error where local machine via `bundle exec` resolved renamed file `init.rb` successfully but, of course, the clean deployment didn't; it was renamed to `console.rb`. Fixed and added a couple of simple additional tests to cover the executed binary and make sure it wakes up OK.
