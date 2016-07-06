@@ -1,3 +1,7 @@
+## 1.1.0 (2016-07-06)
+
+* Update to Rack 2, requiring Ruby 2.2 or later. Local development ruby version file for RBEnv updated to 2.2.5 and version 2.1 removed from Travis build matrix.
+
 ## 1.0.0 (2016-05-04)
 
 * Adds override of `config.yml` via `DATABASE_URL` environment variable; see `README.md` for details.

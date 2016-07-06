@@ -17,9 +17,9 @@ Gem::Specification.new do |s|
   s.files       = Dir[ 'bin/*' ] + Dir[ 'lib/**/*.rb' ] + [ 'LICENSE', 'README.md', 'CHANGELOG.md' ]
   s.license     = 'MIT'
 
-  s.required_ruby_version = '>= 2.1'
+  s.required_ruby_version = '>= 2.2'
 
-  s.add_dependency             'rack',           '~> 1.6'
+  s.add_dependency             'rack',           '~> 2.0'
   s.add_dependency             'activerecord',   '~> 4'
 
   s.add_development_dependency 'rack-test',      '~> 0.6'
