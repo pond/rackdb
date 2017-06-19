@@ -1,3 +1,7 @@
+## 1.1.1 (2017-06-20)
+
+* Simple `bundle update` for maintenance and local build moves from Ruby 2.2.7 to 2.2.7 by RBEnv. Travis matrix updated to Ruby 2.2.7 and 2.3.4, with 2.4.1 added.
+
 ## 1.1.0 (2016-07-06)
 
 * Update to Rack 2, requiring Ruby 2.2 or later. Local development ruby version file for RBEnv updated to 2.2.5 and version 2.1 removed from Travis build matrix.
