@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rackdb (1.1.0)
+    rackdb (1.1.1)
       activerecord (~> 4)
       rack (~> 2.0)
 
