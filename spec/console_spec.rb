@@ -265,7 +265,7 @@ RSpec.describe RackDB::Console do
       Dir.chdir( File.dirname( __FILE__ ) ) do
         console = RackDB::Console.new( [ 'development' ] )
 
-        Kernel.silence_stream( STDERR ) do
+        spec_helper_silence_stream( $stderr ) do
           expect { console.start() }.to raise_error( SystemExit, 'Unknown command-line client for example_development.' )
         end
       end

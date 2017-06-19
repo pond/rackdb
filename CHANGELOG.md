@@ -1,5 +1,10 @@
+## 2.0.0 (2017-06-20)
+
+* Requires Active Record / Active Support 5. These gem versions are not backwards compatible with version 4, so RackDB in turn needs a major version bump.
+
 ## 1.1.1 (2017-06-20)
 
+* This is the last of the Active Record / Active Support 4 series of RackDB versions.
 * Simple `bundle update` for maintenance and local build moves from Ruby 2.2.7 to 2.2.7 by RBEnv. Travis matrix updated to Ruby 2.2.7 and 2.3.4, with 2.4.1 added.
 
 ## 1.1.0 (2016-07-06)

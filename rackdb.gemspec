@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
   s.required_ruby_version = '>= 2.2'
 
   s.add_dependency             'rack',           '~> 2.0'
-  s.add_dependency             'activerecord',   '~> 4'
+  s.add_dependency             'activerecord',   '~> 5'
 
   s.add_development_dependency 'rack-test',      '~> 0.6'
   s.add_development_dependency 'rspec',          '~> 3.3'

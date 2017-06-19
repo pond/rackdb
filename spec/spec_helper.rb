@@ -35,3 +35,16 @@ RSpec.configure do | config |
 
   Kernel.srand( config.seed )
 end
+
+def spec_helper_silence_stream( stream, &block )
+  begin
+    $old_stream = stream.clone
+    stream.reopen( File::NULL, 'w' )
+
+    yield
+
+  ensure
+    stream.reopen( $old_stream )
+
+  end
+end
